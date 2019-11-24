@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+// import env from "env2"
+// const env = require("env2");
+// env("../local.env");
+
 
 class App extends Component {
   constructor(props) {
@@ -9,7 +13,8 @@ class App extends Component {
   }
 
   callAPI() {
-    fetch("http://localhost:9000/testAPI")
+    console.log(process.env.REACT_APP_testAPI)
+    fetch(process.env.REACT_APP_testAPI)
       .then(res => res.text())
       .then(res => this.setState({ apiResponse: res }));
   }
@@ -19,7 +24,6 @@ class App extends Component {
   }
 
   render() {
-    console.log("aaaaa");
     return (
       <div className="App">
         <div className="App-header">
