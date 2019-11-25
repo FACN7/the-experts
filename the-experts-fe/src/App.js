@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-// import env from "env2"
-// const env = require("env2");
-// env("../local.env");
-
 
 class App extends Component {
   constructor(props) {
