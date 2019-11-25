@@ -1,37 +1,44 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import Select from "./components/select/select";
+import Contractors from "./components/contractors/contractors";
+import Contractor from "./components/contractor/contractor";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { apiResponse: "" };
-  }
+export default function App() {
+  const [jobsArray, setJobArray] = useState([
+    { id: 1, value: "wood-worker" },
+    { id: 2, value: "plumber" },
+    { id: 3, value: "electric" },
+    { id: 4, value: "painter" }
+  ]);
+  const [jobValue, setJobValue] = useState("");
+  const [selectedContractors, setSelectedContractors] = useState([]);
 
-  callAPI() {
-    console.log(process.env.REACT_APP_testAPI)
-    fetch(process.env.REACT_APP_testAPI)
+  useEffect(() => {
+    fetch(`http://localhost:9000/contractor-results/${jobValue}`)
       .then(res => res.text())
-      .then(res => this.setState({ apiResponse: res }));
-  }
+      .then(res => {
+        if (jobValue) {
+          setSelectedContractors(JSON.parse(res));
+        } else {
+          setSelectedContractors([]);
+        }
+      });
+  }, [jobValue]);
 
-  componentWillMount() {
-    this.callAPI();
-  }
+  const handleSelect = job => {
+    setJobValue(job);
+  };
 
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">;{this.state.apiResponse}</p>
-        <p className="App-intro">;{"xxxx"}</p>
-
+  return (
+    <div className="App">
+      <Select options={jobsArray} onSelect={handleSelect}></Select>
+      <div>
+        {selectedContractors.length > 0 && (
+          <Contractors contractors={selectedContractors} />
+        )}
       </div>
-    );
-  }
+    </div>
+  );
 }
-
-export default App;
