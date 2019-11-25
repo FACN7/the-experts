@@ -2,7 +2,7 @@ const databaseConnection = require("../database/db_connection.js");
 
 const getContractor = (name, cb) => {
   databaseConnection.query(
-    `SELECT * FROM Contractor WHERE name=$1`,
+    `SELECT * FROM Contractor WHERE job=$1 ORDER BY rating DESC;`,
     [name],
     (err, res) => {
       if (err) {
@@ -14,4 +14,4 @@ const getContractor = (name, cb) => {
   );
 };
 
-module.exports = getbody;
+module.exports = getContractor;
