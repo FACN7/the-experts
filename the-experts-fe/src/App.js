@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import Select from "./components/select/select";
 import Contractors from "./components/contractors/contractors";
-import Contractor from "./components/contractor/contractor";
 
 export default function App() {
   const [jobsArray, setJobArray] = useState([
