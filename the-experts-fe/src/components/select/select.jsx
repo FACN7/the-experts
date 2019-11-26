@@ -12,8 +12,7 @@ export default function Select({ options, onSelect }) {
       {options.map(opt => (
         <option key={opt.id} value={opt.value}>
           {opt.value}
-
-        </option>
+       </option>
       ))}
     </select>
   );

@@ -2,8 +2,7 @@
     transition: 0.1s;
     transform: scale3d(1, 1.1, 1.1);
   }
-  
-  
+    
   .contractor-card {
     display: flex;
     border: 1px solid black;
@@ -11,19 +10,13 @@
     cursor: pointer;
     box-shadow: 3px 5px grey;
     margin: 1em 0 1em 0;
-
-
     margin-top: 2rem;
     margin-left: auto;
     margin-right: auto;
     background: white;
     width: 30rem;
     opacity: 0.95;
-
-  
   }
-  
-  
   
   
   .contractor-img {
@@ -44,6 +37,5 @@
   
   .contractor-info .contractor-title {
     font-size: 1em;
-  
   } 
 

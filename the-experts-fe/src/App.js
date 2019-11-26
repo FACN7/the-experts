@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import Select from "./components/select/select";
 import Contractors from "./components/contractors/contractors";
-import Contractor from "./components/contractor/contractor";
-
 import NavBar from "./components/NavBar/NavBar"
 import WhyUs from "./components/WhyUs/WhyUs"
-import Search from "./components/search/search"
+
 
 
 export default function App() {
@@ -19,9 +16,11 @@ export default function App() {
   ]);
   const [jobValue, setJobValue] = useState("");
   const [selectedContractors, setSelectedContractors] = useState([]);
-
+  
+  
   useEffect(() => {
-    fetch(`http://localhost:9000/contractor-results/${jobValue}`)
+    if(jobValue){
+      fetch(`http://localhost:9000/contractor-results/${jobValue}`)
       .then(res => res.text())
       .then(res => {
         if (jobValue) {
@@ -31,6 +30,8 @@ export default function App() {
         }
       });
   }, [jobValue]);
+    }
+    
 
   const handleSelect = job => {
     setJobValue(job);
@@ -38,12 +39,10 @@ export default function App() {
 
   return (
     <div className="App">
-
-<NavBar firstParm="Login" secondParam="Register"/>
-        {/* <img height="100%" width="100%"  src={"https://cdn.cbtnews.com/wp-content/uploads/2017/10/shutterstock_505405795.jpg"} alt="Logo" /> */}
-         <h1 className="page-description">Find The Most Wanted <br/>Professionals <br/>around</h1>
-
-        {/* <Search /> */}
+    
+      <NavBar firstParm="Login" secondParam="Register"/>
+      <h1 className="page-description">Find The Most Wanted <br/>Professionals <br/>around</h1>
+  
       <Select options={jobsArray} onSelect={handleSelect}></Select>
       <div>
         {selectedContractors.length > 0 && (
@@ -51,11 +50,7 @@ export default function App() {
         )}
       </div>
 
-
-        <Contractors contractors={jobsArray} />
-
-
-        <div className="test">
+      <div className="test">
 
 <WhyUs imageSrc="https://icon-library.net/images/filtering-icon/filtering-icon-5.jpg" description1="Get filtered data" description2="we filter the constructors data to  make sure that you will get the best results" />
 <WhyUs imageSrc="https://cdn4.iconfinder.com/data/icons/user-interface-color-set/128/support_user_interface_color_b-512.png" description1 ="we Are always here for you " description2="if you want to ask or notify us about something just call "/>
