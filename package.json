@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./the-experts-BE/bin/www"
+    "start": "node ./the-experts-BE/bin/www",
+    "heroku-postbuild": "cd the-experts-fe && npm install --only=dev && npm install && npm run build"
+
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
