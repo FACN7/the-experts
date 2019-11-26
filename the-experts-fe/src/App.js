@@ -14,7 +14,7 @@ export default function App() {
   const [selectedContractors, setSelectedContractors] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:9000/contractor-results/${jobValue}`)
+    fetch(`https://the-experts.herokuapp.com/contractor-results/${jobValue}`)
       .then(res => res.text())
       .then(res => {
         if (jobValue) {
