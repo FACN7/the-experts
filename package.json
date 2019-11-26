@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "heroku-prebuild": "cd the-experts-fe && npm install  && npm run build && cd ..",
+    "heroku-prebuild": "cd the-experts-fe && npm install  && npm run build",
     "start": "node ./the-experts-BE/bin/www"
 
   },
