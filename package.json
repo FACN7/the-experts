@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./the-experts-BE/bin/www",
-    "heroku-postbuild": "cd the-experts-fe && npm install --only=dev && npm install && npm run build"
+    "heroku-postbuild": "cd the-experts-fe && npm install  && npm run build",
+    "start": "node ./the-experts-BE/bin/www"
 
   },
   "dependencies": {
