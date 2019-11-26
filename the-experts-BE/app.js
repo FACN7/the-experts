@@ -43,8 +43,10 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
-
+console.log('we2e7', process.env.NODE_ENV)
 if (process.env.NODE_ENV === 'production') {
+  console.log('we2e72', process.env.NODE_ENV)
+
   app.use(express.static(path.join(__dirname, '..', 'the-experts-fe', 'public')));
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'the-experts-fe', 'public', 'index.html'));
