@@ -1,37 +1,68 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import Select from "./components/select/select";
+import Contractors from "./components/contractors/contractors";
+import Contractor from "./components/contractor/contractor";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { apiResponse: "" };
-  }
+import NavBar from "./components/NavBar/NavBar"
+import WhyUs from "./components/WhyUs/WhyUs"
+import Search from "./components/search/search"
 
-  callAPI() {
-    console.log(process.env.REACT_APP_testAPI)
-    fetch(process.env.REACT_APP_testAPI)
+
+export default function App() {
+  const [jobsArray, setJobArray] = useState([
+    { id: 1, value: "wood-worker" },
+    { id: 2, value: "plumber" },
+    { id: 3, value: "electric" },
+    { id: 4, value: "painter" }
+  ]);
+  const [jobValue, setJobValue] = useState("");
+  const [selectedContractors, setSelectedContractors] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://localhost:9000/contractor-results/${jobValue}`)
       .then(res => res.text())
-      .then(res => this.setState({ apiResponse: res }));
-  }
+      .then(res => {
+        if (jobValue) {
+          setSelectedContractors(JSON.parse(res));
+        } else {
+          setSelectedContractors([]);
+        }
+      });
+  }, [jobValue]);
 
-  componentWillMount() {
-    this.callAPI();
-  }
+  const handleSelect = job => {
+    setJobValue(job);
+  };
 
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">;{this.state.apiResponse}</p>
-        <p className="App-intro">;{"xxxx"}</p>
+  return (
+    <div className="App">
 
+<NavBar firstParm="Login" secondParam="Register"/>
+        {/* <img height="100%" width="100%"  src={"https://cdn.cbtnews.com/wp-content/uploads/2017/10/shutterstock_505405795.jpg"} alt="Logo" /> */}
+         <h1 className="page-description">Find The Most Wanted <br/>Professionals <br/>around</h1>
+
+        {/* <Search /> */}
+      <Select options={jobsArray} onSelect={handleSelect}></Select>
+      <div>
+        {selectedContractors.length > 0 && (
+          <Contractors contractors={selectedContractors} />
+        )}
       </div>
-    );
-  }
+
+
+        <Contractors contractors={jobsArray} />
+
+
+        <div className="test">
+
+<WhyUs imageSrc="https://icon-library.net/images/filtering-icon/filtering-icon-5.jpg" description1="Get filtered data" description2="we filter the constructors data to  make sure that you will get the best results" />
+<WhyUs imageSrc="https://cdn4.iconfinder.com/data/icons/user-interface-color-set/128/support_user_interface_color_b-512.png" description1 ="we Are always here for you " description2="if you want to ask or notify us about something just call "/>
+<WhyUs imageSrc="https://cdn3.iconfinder.com/data/icons/miscellaneous-16-solid/128/credible_reliable_Dependable_authentic_credibility_trust-512.png" description1="best Value for the money"  description2="We will grantee that you will get the best service"/>
+
+</div>
+    </div>
+  );
 }
 
-export default App;

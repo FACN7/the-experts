@@ -7,10 +7,12 @@ import "./select.css";
  */
 export default function Select({ options, onSelect }) {
   return (
-    <select onChange={e => onSelect(e.target.value)}>
+    <select className="select" onChange={e => onSelect(e.target.value)}>
+      <option value=""></option>
       {options.map(opt => (
         <option key={opt.id} value={opt.value}>
           {opt.value}
+
         </option>
       ))}
     </select>
