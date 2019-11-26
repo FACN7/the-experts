@@ -44,5 +44,12 @@ app.use(function(err, req, res, next) {
   res.render("error");
 });
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '..', 'the-experts-fe', 'public')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'the-experts-fe', 'public', 'index.html'));
+  });
+}
+
 
 module.exports = app;
