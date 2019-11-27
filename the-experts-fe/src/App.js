@@ -43,11 +43,7 @@ export default function App() {
       </h1>
 
       <Select options={jobsArray} onSelect={handleSelect}></Select>
-      <div>
-        {selectedContractors.length > 0 && (
-          <Contractors contractors={selectedContractors} />
-        )}
-      </div>
+      <div>{jobValue && <Contractors contractors={selectedContractors} />}</div>
 
       <div className="test">
         <WhyUs
