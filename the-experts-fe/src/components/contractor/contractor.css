@@ -1,37 +1,41 @@
 .card-transition:hover {
-  transition: 0.1s;
-  transform: scale3d(1, 1.1, 1.1);
-}
+    transition: 0.1s;
+    transform: scale3d(1, 1.1, 1.1);
+  }
+    
+  .contractor-card {
+    display: flex;
+    border: 1px solid black;
+    width: 300px;
+    cursor: pointer;
+    box-shadow: 3px 5px grey;
+    margin: 1em 0 1em 0;
+    margin-top: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    background: white;
+    width: 30rem;
+    opacity: 0.95;
+  }
+  
+  
+  .contractor-img {
+    /*  width: 700px */
+  }
+  
+  .contractor-img img {
+    border-radius: 50%;
+    max-width: 50px;
+    padding: 1em;
+  }
+  
+  .contractor-info {
+    margin-left: 5rem;
+    margin-top: 1em;
+    
+  }
+  
+  .contractor-info .contractor-title {
+    font-size: 1em;
+  } 
 
-
-.contractor-card {
-  display: flex;
-  border: 1px solid black;
-  width: 300px;
-  cursor: pointer;
-  box-shadow: 3px 5px grey;
-  margin: 1em 0 1em 0;
-}
-
-
-
-
-.contractor-img {
-  /*  width: 700px */
-}
-
-.contractor-img img {
-  border-radius: 50%;
-  max-width: 50px;
-  padding: 1em;
-}
-
-.contractor-info {
-  margin-left: 0;
-  margin-top: 1em;
-}
-
-.contractor-info .contractor-title {
-  font-size: 1em;
-
-}

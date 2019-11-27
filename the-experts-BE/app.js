@@ -27,9 +27,7 @@ app.use("/users", usersRouter);
 app.use("/testAPI", testAPIRouter);
 app.use("/contractor-results/:job", getContractor);
 
-console.log('we2e7', process.env.NODE_ENV)
 if (process.env.NODE_ENV === 'production') {
-  console.log('we2e72', process.env.NODE_ENV)
 
   app.use(express.static(path.join(__dirname, '..', 'the-experts-fe', 'build')));
   app.get('*', (req, res) => {
