@@ -17,7 +17,7 @@ export default function App() {
 
   useEffect(() => {
     if (jobValue) {
-      fetch(`http://localhost:9000/contractor-results/${jobValue}`)
+      fetch(`/contractor-results/${jobValue}`)
         .then(res => res.json())
         .then(res => {
           if (jobValue) {
@@ -43,11 +43,7 @@ export default function App() {
       </h1>
 
       <Select options={jobsArray} onSelect={handleSelect}></Select>
-      <div>
-        {selectedContractors.length > 0 && (
-          <Contractors contractors={selectedContractors} />
-        )}
-      </div>
+      <div>{jobValue && <Contractors contractors={selectedContractors} />}</div>
 
       <div className="test">
         <WhyUs

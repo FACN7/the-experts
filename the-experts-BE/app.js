@@ -23,10 +23,18 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/testAPI", testAPIRouter);
 app.use("/contractor-results/:job", getContractor);
+
+if (process.env.NODE_ENV === 'production') {
+
+  app.use(express.static(path.join(__dirname, '..', 'the-experts-fe', 'build')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname,'..', 'the-experts-fe', 'build', 'index.html'));
+  });
+}
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
