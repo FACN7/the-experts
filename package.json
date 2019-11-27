@@ -5,7 +5,6 @@
   "scripts": {
     "heroku-prebuild": "cd the-experts-fe && npm install  && npm run build",
     "start": "node ./the-experts-BE/bin/www"
-
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -16,6 +15,6 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
-    "promise-pg": "^0.1.1"
+    "pg": "^7.14.0"
   }
 }
