@@ -17,6 +17,16 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/contractor-results/:job", getContractor);
 
+if (process.env.NODE_ENV === "production") {
+  app.use(
+    express.static(path.join(__dirname, "..", "the-experts-fe", "build"))
+  );
+  app.get("*", (req, res) => {
+    res.sendFile(
+      path.join(__dirname, "..", "the-experts-fe", "build", "index.html")
+    );
+  });
+}
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
@@ -25,7 +35,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
+  res.send("error 500");
 });
 
 module.exports = app;
