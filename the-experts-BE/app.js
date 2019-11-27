@@ -8,6 +8,8 @@ const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const testAPIRouter = require("./routes/testAPI");
 const getContractor = require("./routes/contractor-results");
+const addContractor = require("./routes/contractor-post");
+
 const cors = require("cors");
 
 const app = express();
@@ -26,6 +28,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/users", usersRouter);
 app.use("/testAPI", testAPIRouter);
 app.use("/contractor-results/:job", getContractor);
+app.use("addContractor/:name/:job/:rating",addContractor);
 
 if (process.env.NODE_ENV === 'production') {
 
