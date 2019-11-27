@@ -5,6 +5,7 @@
   "scripts": {
     "start":"node ./the-experts-BE/bin/www",
     "dev": "concurrently \"node ./the-experts-BE/bin/www \" \" cd the-experts-fe && npm start \" "
+    "heroku-prebuild": "cd the-experts-fe && npm install  && npm run build",
   },
   "dependencies": {
     "concurrently": "^5.0.0",
@@ -16,6 +17,6 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
-    "promise-pg": "^0.1.1"
+    "pg": "^7.14.0"
   }
 }
