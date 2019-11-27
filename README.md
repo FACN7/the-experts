@@ -10,13 +10,11 @@
  npm i
 ```
 
-In the project directory AND in the the-experts-fe directory, you have to run:
+In the project directory , you have to run:
 
-### `npm start`
+### `npm run dev`
 
-And to serve the FE
-
-### `cd the-experts-fe npm start`
+to start the FE&BE
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.

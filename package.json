@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "concurrently \"node ./the-experts-BE/bin/www \" \" cd the-experts-fe && npm start \" "
+    "start":"node ./the-experts-BE/bin/www",
+    "dev": "concurrently \"node ./the-experts-BE/bin/www \" \" cd the-experts-fe && npm start \" "
   },
   "dependencies": {
     "concurrently": "^5.0.0",
