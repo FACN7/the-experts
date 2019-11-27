@@ -1,5 +1,4 @@
 body {
-  /* background: black */
   background: url("https://cdn.cbtnews.com/wp-content/uploads/2017/10/shutterstock_505405795.jpg");
   background-size: 100%;
   background-repeat: no-repeat;
@@ -50,7 +49,6 @@ body {
     flex-direction: column;
     align-items: center;
     background: whitesmoke;
-    /* padding: 1rem; */
     border-radius: 150px;
   }
 }
