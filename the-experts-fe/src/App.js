@@ -4,6 +4,7 @@ import Select from "./components/select/select";
 import Contractors from "./components/contractors/contractors";
 import NavBar from "./components/NavBar/NavBar";
 import WhyUs from "./components/WhyUs/WhyUs";
+import RegisterationForm from "./components/registerationForm/registerationForm";
 
 export default function App() {
   const [jobsArray, setJobArray] = useState([
@@ -34,34 +35,39 @@ export default function App() {
   };
 
   return (
-    <div className="App">
-      <NavBar firstParm="Login" secondParam="Register" />
-      <h1 className="page-description">
-        Find The Most Wanted <br />
-        Professionals <br />
-        around
-      </h1>
+    <React.Fragment>
+      <div className="App">
+        <NavBar firstParm="Login" secondParam="Register" />
+        <h1 className="page-description">
+          Find The Most Wanted <br />
+          Professionals <br />
+          around
+        </h1>
 
-      <Select options={jobsArray} onSelect={handleSelect}></Select>
-      <div>{jobValue && <Contractors contractors={selectedContractors} />}</div>
+        <Select options={jobsArray} onSelect={handleSelect}></Select>
+        <div>
+          {jobValue && <Contractors contractors={selectedContractors} />}
+        </div>
 
-      <div className="test">
-        <WhyUs
-          imageSrc="https://cdn2.iconfinder.com/data/icons/filter-data/200/70-512.png"
-          description1="Get filtered data"
-          description2="we filter data to make sure that you will get the best results"
-        />
-        <WhyUs
-          imageSrc="https://www.urbanys.org/wp-content/uploads/2017/12/operator_support_girl-512.png"
-          description1="we Are always here for you "
-          description2="if you want to ask or notify us about something just call "
-        />
-        <WhyUs
-          imageSrc="https://cdn3.iconfinder.com/data/icons/miscellaneous-16-solid/128/credible_reliable_Dependable_authentic_credibility_trust-512.png"
-          description1="best Value for the money"
-          description2="We will grantee that you will get the best service"
-        />
+        <div className="test">
+          <WhyUs
+            imageSrc="https://icon-library.net/images/filtering-icon/filtering-icon-5.jpg"
+            description1="Get filtered data"
+            description2="we filter the constructors data to  make sure that you will get the best results"
+          />
+          <WhyUs
+            imageSrc="https://cdn4.iconfinder.com/data/icons/user-interface-color-set/128/support_user_interface_color_b-512.png"
+            description1="we Are always here for you "
+            description2="if you want to ask or notify us about something just call "
+          />
+          <WhyUs
+            imageSrc="https://cdn3.iconfinder.com/data/icons/miscellaneous-16-solid/128/credible_reliable_Dependable_authentic_credibility_trust-512.png"
+            description1="best Value for the money"
+            description2="We will grantee that you will get the best service"
+          />
+        </div>
       </div>
-    </div>
+      <RegisterationForm />
+    </React.Fragment>
   );
 }

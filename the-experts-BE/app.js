@@ -3,7 +3,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const getContractor = require("./routes/contractor-results");
-const addContractor = require("./routes/contractor-post");
+const queries = require("./queries/index");
 
 const cors = require("cors");
 
@@ -18,7 +18,18 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/contractor-results/:job", getContractor);
-app.use("addContractor/:name/:job/:rating",addContractor);
+
+app.post("/addContractor", function(req, res, next) {
+  queries.addContractor(
+    req.body.name,
+    req.body.job,
+    (err, dataResponse) => {
+      if (err) next(err);
+      res.json(dataResponse);
+    },
+    req.body.rating
+  );
+});
 
 if (process.env.NODE_ENV === "production") {
   app.use(
@@ -32,6 +43,7 @@ if (process.env.NODE_ENV === "production") {
 }
 // error handler
 app.use(function(err, req, res, next) {
+  console.log("ebr");
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
