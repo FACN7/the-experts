@@ -3,10 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "start":"node ./the-experts-BE/bin/www",
+    "dev": "concurrently \"node ./the-experts-BE/bin/www \" \" cd the-experts-fe && npm start \" "
     "heroku-prebuild": "cd the-experts-fe && npm install  && npm run build",
-    "start": "node ./the-experts-BE/bin/www"
   },
   "dependencies": {
+    "concurrently": "^5.0.0",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
