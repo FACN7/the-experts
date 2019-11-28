@@ -6,9 +6,9 @@ router.post("/", function(req, res, next) {
   queries.addContractor(
     req.params.name,
     req.params.job,
-    (err, response) => {
+    (err, dataResponse) => {
       if (err) next(err);
-      res.send(response.rows);
+      res.json(dataResponse);
     },
     req.params.rating
   );
