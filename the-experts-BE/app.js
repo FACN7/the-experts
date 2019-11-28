@@ -3,6 +3,8 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const getContractor = require("./routes/contractor-results");
+const addContractor = require("./routes/contractor-post");
+
 const cors = require("cors");
 
 const app = express();
@@ -16,6 +18,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/contractor-results/:job", getContractor);
+app.use("addContractor/:name/:job/:rating",addContractor);
 
 if (process.env.NODE_ENV === "production") {
   app.use(
