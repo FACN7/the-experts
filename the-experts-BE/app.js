@@ -1,20 +1,14 @@
-const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-
-const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
-const testAPIRouter = require("./routes/testAPI");
 const getContractor = require("./routes/contractor-results");
+const addContractor = require("./routes/contractor-post");
+
 const cors = require("cors");
 
 const app = express();
 
-// view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "jade");
 app.use(cors());
 
 app.use(logger("dev"));
@@ -23,24 +17,19 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/users", usersRouter);
-app.use("/testAPI", testAPIRouter);
 app.use("/contractor-results/:job", getContractor);
+app.use("addContractor/:name/:job/:rating",addContractor);
 
-if (process.env.NODE_ENV === 'production') {
-
-  app.use(express.static(path.join(__dirname, '..', 'the-experts-fe', 'build')));
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname,'..', 'the-experts-fe', 'build', 'index.html'));
+if (process.env.NODE_ENV === "production") {
+  app.use(
+    express.static(path.join(__dirname, "..", "the-experts-fe", "build"))
+  );
+  app.get("*", (req, res) => {
+    res.sendFile(
+      path.join(__dirname, "..", "the-experts-fe", "build", "index.html")
+    );
   });
 }
-
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
-
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
@@ -49,7 +38,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
+  res.send("error 500");
 });
 
 module.exports = app;
