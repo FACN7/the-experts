@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Joi from "joi";
 import "./registerationForm.css";
-import { CLIENT_RENEG_LIMIT } from "tls";
 
 export default function RegisterationForm() {
   const [contractor, setContractor] = useState({ name: "", job: "" });
