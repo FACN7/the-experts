@@ -3,8 +3,8 @@ import Joi from "joi";
 import "./registerationForm.css";
 
 export default function RegisterationForm() {
-  const [name, setName] = useState("");
-  const [job, setJob] = useState("");
+  const [contractor, setContractor] = useState({ name: "", job: "" });
+  const [errors, setErrors] = useState({});
 
   const schema = Joi.object({
     name: Joi.string()
@@ -18,47 +18,66 @@ export default function RegisterationForm() {
       .required()
   });
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    const { error, value } = schema.validate({ name, job });
-    if (error) {
-      console.log(error.details[0].message);
-    }
+  const validate = () => {
+    const { error } = schema.validate(contractor, { abortEarly: false });
+    if (!error) return null;
 
-    console.log(value);
+    const errors = {};
+    for (let item of error.details) errors[item.path[0]] = item.message;
+
+    return errors;
   };
 
-  const handleChange = e => {
-    if (e.target.name === "name") {
-      setName(e.target.value);
-    }
-    if (e.target.name === "job") {
-      setJob(e.target.value);
-    }
+  const handleSubmit = e => {
+    e.preventDefault();
+    const errors = validate();
+
+    setErrors({ ...errors });
+    if (errors) return;
+
+    // make a post request with the contractor object to ebraheem
+    fetch("/addContractor", {
+      method: "POST",
+      body: contractor
+    });
+    // redirect to another page
+  };
+  const handleChange = ({ currentTarget: input }) => {
+    contractor[input.name] = input.value;
+    setContractor({ ...contractor });
   };
 
   return (
     <React.Fragment>
       <div className="form-container">
-        <h1>Hello Form</h1>
+        <h1>Start Your Journey</h1>
 
         <form onSubmit={handleSubmit} className="reg-form">
           <input
             type="text"
             placeholder="Name"
-            value={name}
+            value={contractor.name}
             name="name"
             onChange={handleChange}
           />
+
+          {errors.name && (
+            <div className="alert alert-danger">{errors.name}</div>
+          )}
+
           <input
             type="text"
             placeholder="Job"
-            value={job}
+            value={contractor.job}
             name="job"
             onChange={handleChange}
           />
+          {errors.job && <div className="alert alert-danger">{errors.job}</div>}
           <div className="form-btn">
-            <button type="submit" disabled={false}>
+            <button
+              type="submit"
+              className={validate() ? "btn btn-danger" : "btn btn-success"}
+            >
               Submit
             </button>
           </div>

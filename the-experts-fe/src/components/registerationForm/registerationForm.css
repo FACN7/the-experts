@@ -2,17 +2,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 2em;
 }
 
 .reg-form {
   display: flex;
   flex-direction: column;
   width: 50%;
+  padding-top: 2em;
 }
 
-
 .reg-form input {
-  padding: .5em;
+  padding: 0.5em;
   margin: 1.5em;
 }
 
@@ -22,6 +23,6 @@
 
 .reg-form button {
   width: 50%;
-  padding: .5em;
+  padding: 0.5em;
   margin: 1.5em;
 }
