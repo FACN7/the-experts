@@ -1,10 +1,10 @@
 const databaseConnection = require("../database/db_connection.js");
 
-const addContractor = (name, job, cb, rating) => {
+const addContractor = (name, job, cb) => {
   databaseConnection.query(
-    `INSERT INTO Contractor (cont_name,job,rating)
-        VALUES ($1, $2,$3 );`,
-    [name, job, rating],
+    `INSERT INTO Contractor (cont_name,job)
+        VALUES ($1, $2 );`,
+    [name, job],
     (err, res) => {
       if (err) {
         return cb(err);

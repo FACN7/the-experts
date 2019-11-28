@@ -4,6 +4,7 @@ import Select from "./components/select/select";
 import Contractors from "./components/contractors/contractors";
 import NavBar from "./components/NavBar/NavBar";
 import WhyUs from "./components/WhyUs/WhyUs";
+import RegisterationForm from "./components/registerationForm/registerationForm";
 
 export default function App() {
   const [jobsArray, setJobArray] = useState([
@@ -34,16 +35,19 @@ export default function App() {
   };
 
   return (
-    <div className="App">
-      <NavBar firstParm="Login" secondParam="Register" />
-      <h1 className="page-description">
-        Find The Most Wanted <br />
-        Professionals <br />
-        around
-      </h1>
+    <React.Fragment>
+      <div className="App">
+        <NavBar firstParm="Login" secondParam="Register" />
+        <h1 className="page-description">
+          Find The Most Wanted <br />
+          Professionals <br />
+          around
+        </h1>
 
-      <Select options={jobsArray} onSelect={handleSelect}></Select>
-      <div>{jobValue && <Contractors contractors={selectedContractors} />}</div>
+        <Select options={jobsArray} onSelect={handleSelect}></Select>
+        <div>
+          {jobValue && <Contractors contractors={selectedContractors} />}
+        </div>
 
       <div className="test">
         <WhyUs
@@ -62,6 +66,7 @@ export default function App() {
           description2="We will grantee that you will get the best service"
         />
       </div>
-    </div>
+      <RegisterationForm />
+    </React.Fragment>
   );
 }
