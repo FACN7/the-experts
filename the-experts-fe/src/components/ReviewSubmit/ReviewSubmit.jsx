@@ -22,11 +22,7 @@ export default function ReviewForm({ user_id = 1, contractor_id = 1 }) {
     }).catch(err => console.log(err));
     // redirect to another page
   };
-  const handleChange = ({ currentTarget: input }) => {
-    console.log(input);
-    review[input.name] = input.value;
-    setReview({ ...review });
-  };
+  const handleChange = ({ currentTarget: input }) => setReview({ ...review, [input.name]: input.value });
 
   return (
     <React.Fragment>
@@ -49,10 +45,7 @@ export default function ReviewForm({ user_id = 1, contractor_id = 1 }) {
               }
               value={review.isliked ? "unlike" : "like"}
               selected={review.isliked}
-              onClick={() => {
-                review.isliked = !review.isliked;
-                setReview({ ...review });
-              }}
+              onClick={() => setReview({ ...review, isliked: !review.isliked })}
             ></i>
           </div>
           <div className="form-btn">
