@@ -9,7 +9,7 @@ const { sign, verify } = require('jsonwebtoken');
 const getReview = require("./routes/getReview");
 const queries = require("./queries/index");
 env("./config.env");
-let SECRET = process.env.SECRET;
+const SECRET = process.env.SECRET;
 
 const cors = require("cors");
 
