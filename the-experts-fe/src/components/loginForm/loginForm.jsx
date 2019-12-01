@@ -1,16 +1,20 @@
-import React, { useState, useEffect } from "react";
-import "./registerationForm.css";
+import React, { useState } from "react";
 
-export default function RegisterationForm() {
-  const [contractor, setContractor] = useState({ name: "", job: "" });
+export default function LoginForm() {
+  const [user, setUser] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: ""
+  });
 
   const handleSubmit = e => {
     e.preventDefault();
-
+    console.log(user);
     // make a post request with the contractor object to ebraheem
-    fetch("/addContractor", {
+    fetch("/replace-me", {
       method: "POST",
-      body: JSON.stringify(contractor),
+      body: JSON.stringify(user),
       headers: {
         "Content-Type": "application/json"
       }
@@ -18,35 +22,34 @@ export default function RegisterationForm() {
     // redirect to another page
   };
   const handleChange = ({ currentTarget: input }) => {
-    contractor[input.name] = input.value;
-    setContractor({ ...contractor });
+    user[input.name] = input.value;
+    setUser({ ...user });
   };
 
   return (
     <React.Fragment>
       <div className="form-container">
-        <h1>Start Your Journey</h1>
+        <h1>Login</h1>
 
         <form onSubmit={handleSubmit} className="reg-form">
           <input
-            type="text"
-            placeholder="Name"
-            value={contractor.name}
-            name="name"
+            type="email"
+            placeholder="Enter email..."
+            value={user.email}
+            name="email"
             onChange={handleChange}
             required
-            minlength="3"
+          />
+          <input
+            type="password"
+            placeholder="Enter password..."
+            value={user.password}
+            name="password"
+            onChange={handleChange}
+            minLength="8"
+            required
           />
 
-          <input
-            type="text"
-            placeholder="Job"
-            value={contractor.job}
-            name="job"
-            onChange={handleChange}
-            required
-            minlength="3"
-          />
           <div className="form-btn">
             <button type="submit" className="btn btn-success">
               Submit
