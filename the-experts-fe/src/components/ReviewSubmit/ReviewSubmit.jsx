@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./ReviewSubmit.css";
 
-export default function ReviewForm({ user_id=1, contractor_id=1}) {
+export default function ReviewForm({ user_id = 1, contractor_id = 1 }) {
   const [review, setReview] = useState({ reviewBody: "", isliked: false });
 
   const handleSubmit = e => {
@@ -31,26 +31,30 @@ export default function ReviewForm({ user_id=1, contractor_id=1}) {
   return (
     <React.Fragment>
       <div className="form-container">
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="ReviewMe"
-            value={review.reviewBody}
-            name="reviewBody"
-            onChange={handleChange}
-            required
-            minLength="3"
-          />
+        <form onSubmit={handleSubmit} className="rev-form">
+          <div className="rev-container">
+            <input
+              type="text"
+              placeholder="ReviewMe"
+              value={review.reviewBody}
+              name="reviewBody"
+              onChange={handleChange}
+              required
+              minLength="3"
+            />
 
-          <input
-            type="checkbox"
-            value={review.isliked ? "unlike" : "like"}
-            selected={review.isliked}
-            onChange={() => {
-              review.isliked = !review.isliked;
-              setReview({ ...review });
-            }}
-          ></input>
+            <i
+              className={
+                review.isliked ? "fa fa-thumbs-up" : "fa fa-thumbs-down"
+              }
+              value={review.isliked ? "unlike" : "like"}
+              selected={review.isliked}
+              onClick={() => {
+                review.isliked = !review.isliked;
+                setReview({ ...review });
+              }}
+            ></i>
+          </div>
           <div className="form-btn">
             <button type="submit" className="btn btn-success">
               Submit
