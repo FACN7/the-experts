@@ -34,7 +34,13 @@ app.post("/addContractor", function(req, res, next) {
 });
 
 app.post("/addReview", function(req, res, next) {
-  queries.addContractor(req.body, (err, dataResponse) => {
+  let body = {
+    user_id: req.body.user_id,
+    contractor_id:req.body.contractor_id,
+    reviewBody:req.body.reviewBody,
+    isliked:req.body.isliked,
+  };
+  queries.addReview(body, (err, dataResponse) => {
     if (err) next(err);
     res.json(dataResponse);
   });
