@@ -3,8 +3,11 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const getContractor = require("./routes/contractor-results");
-const {  comparePasswords,  hashPassword}=require('./public/javascripts/passwordmangment');
-const { sign, verify } = require('jsonwebtoken');
+const {
+  comparePasswords,
+  hashPassword
+} = require("./public/javascripts/passwordmangment");
+const { sign, verify } = require("jsonwebtoken");
 const getReview = require("./routes/getReview");
 const queries = require("./queries/index");
 const env = require("env2");
@@ -49,35 +52,40 @@ app.post("/addReview", function(req, res, next) {
 app.post("/login", function(req, res, next) {
   queries.getUser(req.body.email, (err, dataResponse) => {
     if (err) next(err);
-    comparePasswords(req.body.password,dataResponse.password,(error,result)=>{
-      if(error) next(error);
-      if(!result) res.json(null);
-      const jwt=sign(req.body.email,SECRET);
-      res.cookie('jwt',jwt);
-    res.json(jwt);
+    comparePasswords(
+      req.body.password,
+      dataResponse.password,
+      (error, result) => {
+        if (error) next(error);
+        if (!result) res.json(null);
+        const jwt = sign(req.body.email, SECRET);
+        res.cookie("jwt", jwt);
+        res.json(jwt);
+      }
+    );
   });
 });
-});
 
-app.post("/signup",function(req, res, next) {
-  let body=req.body;
+app.post("/signup", function(req, res, next) {
+  let body = {
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    email: req.body.email,
+    user_password: req.body.user_password
+  };
   let jwt = req.cookies.jwt;
-  if(cookie) res.json(jwt)
-  hashPassword(body.password,(err,result)=>{
-    if(err) next(err);
-    body.password=result;
+  if (cookie) res.json(jwt);
+  hashPassword(body.password, (err, result) => {
+    if (err) next(err);
+    body.password = result;
     queries.addUser(body, (err, dataResponse) => {
       if (err) next(err);
-       jwt=sign(req.body.email,SECRET);
-      res.cookie('jwt',jwt);
-    res.json(jwt);
-    })
-  })
-
+      jwt = sign(req.body.email, SECRET);
+      res.cookie("jwt", jwt);
+      res.json(jwt);
+    });
+  });
 });
-
-
-
 
 if (process.env.NODE_ENV === "production") {
   app.use(
