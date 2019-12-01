@@ -6,6 +6,7 @@ import ContractorProfile from "./components/ContractorProfile/ContractorProfile"
 import { Route, Switch } from "react-router-dom";
 import Home from "./components/home/home";
 
+
 export default function App() {
   return (
     <React.Fragment>
@@ -15,6 +16,7 @@ export default function App() {
           <Route path="/ContractorProfile/:id"  component={ContractorProfile} />}/>
           <Route exact path="/" component={Home}></Route>
         </Switch>
+        <ReviewForm></ReviewForm>
     </React.Fragment>
   );
 }
