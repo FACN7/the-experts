@@ -10,7 +10,7 @@ export default function RegisterForm() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(user);
+    
     // make a post request with the contractor object to ebraheem
     fetch("/replace-me", {
       method: "POST",
