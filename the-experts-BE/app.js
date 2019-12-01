@@ -3,6 +3,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const getContractor = require("./routes/contractor-results");
+const getReview = require("./routes/getReview");
 const queries = require("./queries/index");
 
 const cors = require("cors");
@@ -18,6 +19,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/contractor-results/:job", getContractor);
+app.use("/getReview/:contractor_id", getReview);
 
 app.post("/addContractor", function(req, res, next) {
   queries.addContractor(
@@ -30,7 +32,6 @@ app.post("/addContractor", function(req, res, next) {
     req.body.rating
   );
 });
-
 
 if (process.env.NODE_ENV === "production") {
   app.use(
