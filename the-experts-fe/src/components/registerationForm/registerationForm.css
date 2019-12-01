@@ -5,6 +5,11 @@
   padding-top: 2em;
 }
 
+.form-container h1 {
+  font-size: 1.5em;
+
+}
+
 .reg-form {
   display: flex;
   flex-direction: column;
