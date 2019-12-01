@@ -1,54 +1,9 @@
-body {
-  background: url("https://cdn.cbtnews.com/wp-content/uploads/2017/10/shutterstock_505405795.jpg");
-  background-size: 100%;
-  background-repeat: no-repeat;
-}
+.App {}
 
-.App {
-  text-align: center;
-}
 
-.page-description {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 13rem;
-  font-size: 4rem;
-  color: white;
-  font-weight: bolder;
-}
 
-@media screen and (max-width: 768px) {
-  .page-description {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 4rem;
-    text-align: center;
-    font-size: 1rem;
-  }
-}
+@media screen and (max-width: 768px) {}
 
-.whyWe {
-  margin-top: 1100px;
-  padding: 100px;
-  display: flex;
-  justify-content: space-evenly;
-}
 
-.test {
-  margin-top: 40rem;
-  display: flex;
-  justify-content: space-evenly;
-  background: whitesmoke;
-  padding: 20px;
-}
 
-@media screen and (max-width: 768px) {
-  .test {
-    margin-top: 4rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: whitesmoke;
-    border-radius: 150px;
-  }
-}
+@media screen and (max-width: 768px) {}
