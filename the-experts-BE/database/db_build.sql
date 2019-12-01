@@ -1,6 +1,7 @@
 BEGIN;
 
 DROP TABLE IF EXISTS Contractor,
+Reviews,
 Users;
 
 CREATE TABLE IF NOT EXISTS Contractor (
@@ -14,7 +15,7 @@ CREATE TABLE IF NOT EXISTS Users (
     id SERIAL PRIMARY KEY,
     first_name VARCHAR (50) NOT NULL,
     last_name VARCHAR (50) NOT NULL,
-    email TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE,
     user_password TEXT NOT NULL
 );
 

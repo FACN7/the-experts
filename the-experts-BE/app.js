@@ -3,8 +3,12 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const getContractor = require("./routes/contractor-results");
+const {  comparePasswords,  hashPassword}=require('./scripts/passwordmangment');
+const { sign, verify } = require('jsonwebtoken');
 const getReview = require("./routes/getReview");
 const queries = require("./queries/index");
+env("./config.env");
+let SECRET = process.env.SECRET;
 
 const cors = require("cors");
 
@@ -34,11 +38,26 @@ app.post("/addContractor", function(req, res, next) {
 });
 
 app.post("/addReview", function(req, res, next) {
-  queries.addContractor(req.body, (err, dataResponse) => {
+  queries.addReview(req.body, (err, dataResponse) => {
     if (err) next(err);
     res.json(dataResponse);
   });
 });
+
+app.post("/login", function(req, res, next) {
+  queries.getUser(req.body.email, (err, dataResponse) => {
+    if (err) next(err);
+    comparePasswords(req.body.password,dataResponse.password,(error,result)=>{
+      if(error) next(error);
+      if(!result) res.json(null);
+      const jwt=sign(req.body.email,SECRET);
+      res.cookie('jwt',jwt);
+    res.json(jwt);
+  });
+});
+
+
+
 
 if (process.env.NODE_ENV === "production") {
   app.use(
