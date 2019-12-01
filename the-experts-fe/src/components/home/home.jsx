@@ -3,6 +3,7 @@ import Select from "../select/select";
 import WhyUs from "../WhyUs/WhyUs";
 import Contractors from "../contractors/contractors";
 import "./home.css";
+import ContractorForm from "../contractorForm/ContractorForm";
 
 export default function Home() {
   const [jobsArray, setJobArray] = useState([
