@@ -15,6 +15,9 @@ export default function App() {
           <Route exact path="/" component={Home}></Route>
         </Switch>
       </div>
+
+      </div>
+      <RegisterationForm />
     </React.Fragment>
   );
 }
