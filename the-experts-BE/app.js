@@ -81,7 +81,7 @@ app.post("/signup", function(req, res, next) {
   };
   let jwt = req.cookies.jwt;
   if (cookie) res.json(jwt);
-  hashPassword(body.password, (err, result) => {
+  hashPassword(body.user_password, (err, result) => {
     if (err) next(err);
     body.password = result;
     queries.addUser(body, (err, dataResponse) => {
