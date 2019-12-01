@@ -13,7 +13,7 @@ const queries = require("./queries/index");
 const env = require("env2");
 
 env("./config.env");
-let SECRET = process.env.SECRET;
+const SECRET = process.env.SECRET;
 
 const cors = require("cors");
 
@@ -43,7 +43,13 @@ app.post("/addContractor", function(req, res, next) {
 });
 
 app.post("/addReview", function(req, res, next) {
-  queries.addReview(req.body, (err, dataResponse) => {
+  const body = {
+    user_id: req.body.user_id,
+    contractor_id:req.body.contractor_id,
+    reviewBody:req.body.reviewBody,
+    isliked:req.body.isliked,
+  };
+  queries.addReview(body, (err, dataResponse) => {
     if (err) next(err);
     res.json(dataResponse);
   });

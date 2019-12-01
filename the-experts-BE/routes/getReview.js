@@ -5,7 +5,7 @@ const queries = require("../queries");
 router.get("/", function(req, res, next) {
   queries.getReview(req.params.contractor_id, (err, response) => {
     if (err) next(err);
-    res.send(response.rows);
+    res.json(response.rows);
   });
 });
 module.exports = router;
