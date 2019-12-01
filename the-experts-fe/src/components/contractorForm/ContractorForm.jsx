@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import "./registerationForm.css";
+import "../../../public/css/form.css";
 
-export default function RegisterationForm() {
+export default function ContractorForm() {
   const [contractor, setContractor] = useState({ name: "", job: "" });
 
   const handleSubmit = e => {
