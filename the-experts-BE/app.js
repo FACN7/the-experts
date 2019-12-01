@@ -33,6 +33,13 @@ app.post("/addContractor", function(req, res, next) {
   );
 });
 
+app.post("/addReview", function(req, res, next) {
+  queries.addContractor(req.body, (err, dataResponse) => {
+    if (err) next(err);
+    res.json(dataResponse);
+  });
+});
+
 if (process.env.NODE_ENV === "production") {
   app.use(
     express.static(path.join(__dirname, "..", "the-experts-fe", "build"))
