@@ -59,21 +59,25 @@ app.post("/login", function(req, res, next) {
 });
 });
 
-app.post("/signup",function(req, res, next) {
-  let body=req.body;
+app.post("/signup", function(req, res, next) {
+  let body = {
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    email: req.body.email,
+    user_password: req.body.user_password
+  };
   let jwt = req.cookies.jwt;
-  if(cookie) res.json(jwt)
-  hashPassword(body.password,(err,result)=>{
-    if(err) next(err);
-    body.password=result;
+  if (cookie) res.json(jwt);
+  hashPassword(body.user_password, (err, result) => {
+    if (err) next(err);
+    body.password = result;
     queries.addUser(body, (err, dataResponse) => {
       if (err) next(err);
-       jwt=sign(req.body.email,SECRET);
-      res.cookie('jwt',jwt);
-    res.json(jwt);
-    })
-  })
-
+      jwt = sign(req.body.email, SECRET);
+      res.cookie("jwt", jwt);
+      res.json(jwt);
+    });
+  });
 });
 
 if (process.env.NODE_ENV === "production") {
