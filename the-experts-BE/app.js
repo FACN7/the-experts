@@ -5,6 +5,7 @@ const logger = require("morgan");
 const getContractor = require("./routes/contractor-results");
 const {  comparePasswords,  hashPassword}=require('./scripts/passwordmangment');
 const { sign, verify } = require('jsonwebtoken');
+
 const getReview = require("./routes/getReview");
 const queries = require("./queries/index");
 env("./config.env");
@@ -55,9 +56,6 @@ app.post("/login", function(req, res, next) {
     res.json(jwt);
   });
 });
-
-
-
 
 if (process.env.NODE_ENV === "production") {
   app.use(
