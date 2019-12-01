@@ -1,0 +1,51 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 2em;
+}
+
+.form-container h1 {
+  font-size: 1.5em;
+}
+
+.rev-form {
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+  padding-top: 2em;
+}
+
+.rev-form input {
+  text-align: left;
+  padding: 0.5em;
+  margin: 0.5em;
+  height: 5em;  
+  border-radius: 20%;
+}
+
+.form-btn {
+  text-align: center;
+}
+
+.rev-form button {
+  width: 10%;
+  padding: 0.5em;
+  margin: 1.5em;
+}
+
+.fa {
+  margin: 10px;
+  font-size: 50px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.fa:hover {
+  color: darkblue;
+}
+.rev-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

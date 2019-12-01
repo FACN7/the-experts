@@ -33,6 +33,19 @@ app.post("/addContractor", function(req, res, next) {
   );
 });
 
+app.post("/addReview", function(req, res, next) {
+  const body = {
+    user_id: req.body.user_id,
+    contractor_id:req.body.contractor_id,
+    reviewBody:req.body.reviewBody,
+    isliked:req.body.isliked,
+  };
+  queries.addReview(body, (err, dataResponse) => {
+    if (err) next(err);
+    res.json(dataResponse);
+  });
+});
+
 if (process.env.NODE_ENV === "production") {
   app.use(
     express.static(path.join(__dirname, "..", "the-experts-fe", "build"))
