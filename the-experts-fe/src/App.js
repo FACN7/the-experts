@@ -9,15 +9,10 @@ export default function App() {
   return (
     <React.Fragment>
       <NavBar firstParm="Login" secondParam="Register" />
-      <div>
         <Switch className="App">
           <Route path="/register" component={RegisterationForm}></Route>
           <Route exact path="/" component={Home}></Route>
         </Switch>
-      </div>
-
-      </div>
-      <RegisterationForm />
     </React.Fragment>
   );
 }
