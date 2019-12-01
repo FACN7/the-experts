@@ -39,7 +39,6 @@ app.post("/addContractor", function(req, res, next) {
 });
 
 app.post("/addReview", function(req, res, next) {
-
   const body = {
     user_id: req.body.user_id,
     contractor_id:req.body.contractor_id,
