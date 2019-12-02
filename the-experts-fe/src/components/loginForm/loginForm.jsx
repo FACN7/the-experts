@@ -22,8 +22,7 @@ export default function LoginForm() {
     // redirect to another page
   };
   const handleChange = ({ currentTarget: input }) => {
-    user[input.name] = input.value;
-    setUser({ ...user });
+    setUser({ ...user, [input.name]: input.value });
   };
 
   return (

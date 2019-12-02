@@ -18,8 +18,7 @@ export default function ContractorForm() {
     // redirect to another page
   };
   const handleChange = ({ currentTarget: input }) => {
-    contractor[input.name] = input.value;
-    setContractor({ ...contractor });
+    setContractor({ ...contractor, [input.name]: input.value });
   };
 
   return (
