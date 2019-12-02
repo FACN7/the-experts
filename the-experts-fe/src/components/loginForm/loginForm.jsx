@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import Cookies from "js-cookie";
 
-export default function LoginForm() {
+export default function LoginForm(props) {
   const [user, setUser] = useState({
     first_name: "",
     last_name: "",
@@ -18,12 +19,15 @@ export default function LoginForm() {
       headers: {
         "Content-Type": "application/json"
       }
-    }).catch(err => console.log(err));
-    // redirect to another page
+    })
+      .then(res => {
+        localStorage.setItem("token", Cookies.get("jwt"));
+        window.location = "/";
+      })
+      .catch(err => console.log(err));
   };
   const handleChange = ({ currentTarget: input }) => {
-    user[input.name] = input.value;
-    setUser({ ...user });
+    setUser({ ...user, [input.name]: input.value });
   };
 
   return (
