@@ -43,13 +43,7 @@ app.post("/addContractor", function(req, res, next) {
 });
 
 app.post("/addReview", function(req, res, next) {
-  const body = {
-    user_id: req.body.user_id,
-    contractor_id: req.body.contractor_id,
-    reviewBody: req.body.reviewBody,
-    isliked: req.body.isliked
-  };
-  queries.addReview(body, (err, dataResponse) => {
+  queries.addReview(req.body, (err, dataResponse) => {
     if (err) next(err);
     res.json(dataResponse);
   });
@@ -82,12 +76,10 @@ app.post("/login", function(req, res, next) {
 });
 
 app.post("/signup", function(req, res, next) {
-  let body = { ...req.body };
-
-  hashPassword(body.user_password, (err, result) => {
+  hashPassword(req.body.user_password, (err, hashedPws) => {
     if (err) next(err);
-    body.user_password = result;
-    queries.addUser(body, (error, dataResponse) => {
+    const bodyWithHashedPwd = { ...req.body, user_password: hashedPws };
+    queries.addUser(bodyWithHashedPwd, (error, dataResponse) => {
       if (error) {
         if (error.message.includes("duplicate key"))
           res.send("email already exists");
@@ -96,12 +88,7 @@ app.post("/signup", function(req, res, next) {
         }
         return;
       }
-      let jwt = req.cookies.jwt;
-      if (jwt) {
-        res.send("you are already logged in");
-        return;
-      }
-      jwt = sign(body.email, SECRET);
+      const jwt = sign(bodyWithHashedPwd.email, SECRET);
       res.cookie("jwt", jwt);
       res.send("you signed up successfully");
     });
