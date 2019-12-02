@@ -30,6 +30,28 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/contractor-results/:job", getContractor);
 app.use("/getReview/:contractor_id", getReview);
 
+app.get("/auth", (req, res, next) => {
+  const jwt = req.cookies.jwt;
+  if (!jwt) {
+    res.json({ msg: "Not Authintcated" });
+    return;
+  }
+  verify(jwt, SECRET, (err, user) => {
+    if (err) next(err);
+    queries.getUser(user.email, (err, dataResponse) => {
+      if (err) {
+        next(err);
+        return;
+      }
+      if (!dataResponse) {
+        res.json({ msg: `there is jwt but no such email ${user.email}` });
+        return;
+      }
+      res.json(user);
+    });
+  });
+});
+
 app.post("/addContractor", function(req, res, next) {
   queries.addContractor(
     req.body.name,
@@ -67,9 +89,12 @@ app.post("/login", function(req, res, next) {
           res.json(null);
           return;
         }
-        const jwt = sign(req.body.email, SECRET);
+        const user = { ...dataResponse.rows[0] };
+        delete user.user_password;
+        const jwt = sign(JSON.stringify(user), SECRET);
         res.cookie("jwt", jwt);
-        res.send("you are logged in successfully");
+        user.status = "you are logged in successfully";
+        res.json(user);
       }
     );
   });
@@ -88,7 +113,9 @@ app.post("/signup", function(req, res, next) {
         }
         return;
       }
-      const jwt = sign(bodyWithHashedPwd.email, SECRET);
+      const user = { ...bodyWithHashedPwd };
+      delete user.hashedPws;
+      const jwt = sign(JSON.stringify(user), SECRET);
       res.cookie("jwt", jwt);
       res.send("you signed up successfully");
     });
