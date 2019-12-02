@@ -2,17 +2,17 @@ import React, { useState } from "react";
 
 export default function RegisterForm() {
   const [user, setUser] = useState({
-    firstName: "",
-    lastName: "",
+    first_name: "",
+    last_name: "",
     email: "",
-    password: ""
+    user_password: ""
   });
 
   const handleSubmit = e => {
     e.preventDefault();
     
     // make a post request with the contractor object to ebraheem
-    fetch("/replace-me", {
+    fetch("/signup", {
       method: "POST",
       body: JSON.stringify(user),
       headers: {
@@ -35,8 +35,8 @@ export default function RegisterForm() {
           <input
             type="text"
             placeholder="Enter first name..."
-            value={user.firstName}
-            name="firstName"
+            value={user.first_name}
+            name="first_name"
             onChange={handleChange}
             required
             minLength="3"
@@ -44,8 +44,8 @@ export default function RegisterForm() {
           <input
             type="text"
             placeholder="Enter last name..."
-            value={user.lastName}
-            name="lastName"
+            value={user.last_name}
+            name="last_name"
             onChange={handleChange}
             required
             minLength="3"
@@ -61,8 +61,8 @@ export default function RegisterForm() {
           <input
             type="password"
             placeholder="Enter password..."
-            value={user.password}
-            name="password"
+            value={user.user_password}
+            name="user_password"
             onChange={handleChange}
             minLength="8"
             required

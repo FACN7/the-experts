@@ -3,11 +3,15 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const getContractor = require("./routes/contractor-results");
-const {  comparePasswords,  hashPassword}=require('./scripts/passwordmangment');
-const { sign, verify } = require('jsonwebtoken');
-
+const {
+  comparePasswords,
+  hashPassword
+} = require("./public/javascripts/passwordmangment");
+const { sign, verify } = require("jsonwebtoken");
 const getReview = require("./routes/getReview");
 const queries = require("./queries/index");
+const env = require("env2");
+
 env("./config.env");
 const SECRET = process.env.SECRET;
 
@@ -39,13 +43,7 @@ app.post("/addContractor", function(req, res, next) {
 });
 
 app.post("/addReview", function(req, res, next) {
-  const body = {
-    user_id: req.body.user_id,
-    contractor_id:req.body.contractor_id,
-    reviewBody:req.body.reviewBody,
-    isliked:req.body.isliked,
-  };
-  queries.addReview(body, (err, dataResponse) => {
+  queries.addReview(req.body, (err, dataResponse) => {
     if (err) next(err);
     res.json(dataResponse);
   });
@@ -53,13 +51,47 @@ app.post("/addReview", function(req, res, next) {
 
 app.post("/login", function(req, res, next) {
   queries.getUser(req.body.email, (err, dataResponse) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    comparePasswords(
+      req.body.user_password,
+      dataResponse.rows[0].user_password,
+      (error, result) => {
+        if (error) {
+          next(err);
+          return;
+        }
+        if (!result) {
+          res.json(null);
+          return;
+        }
+        const jwt = sign(req.body.email, SECRET);
+        res.cookie("jwt", jwt);
+        res.send("you are logged in successfully");
+      }
+    );
+  });
+});
+
+app.post("/signup", function(req, res, next) {
+  hashPassword(req.body.user_password, (err, hashedPws) => {
     if (err) next(err);
-    comparePasswords(req.body.password,dataResponse.password,(error,result)=>{
-      if(error) next(error);
-      if(!result) res.json(null);
-      const jwt=sign(req.body.email,SECRET);
-      res.cookie('jwt',jwt);
-    res.json(jwt);
+    const bodyWithHashedPwd = { ...req.body, user_password: hashedPws };
+    queries.addUser(bodyWithHashedPwd, (error, dataResponse) => {
+      if (error) {
+        if (error.message.includes("duplicate key"))
+          res.send("email already exists");
+        else {
+          next(error);
+        }
+        return;
+      }
+      const jwt = sign(bodyWithHashedPwd.email, SECRET);
+      res.cookie("jwt", jwt);
+      res.send("you signed up successfully");
+    });
   });
 });
 
