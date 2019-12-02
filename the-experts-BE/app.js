@@ -45,9 +45,9 @@ app.post("/addContractor", function(req, res, next) {
 app.post("/addReview", function(req, res, next) {
   const body = {
     user_id: req.body.user_id,
-    contractor_id:req.body.contractor_id,
-    reviewBody:req.body.reviewBody,
-    isliked:req.body.isliked,
+    contractor_id: req.body.contractor_id,
+    reviewBody: req.body.reviewBody,
+    isliked: req.body.isliked
   };
   queries.addReview(body, (err, dataResponse) => {
     if (err) next(err);
@@ -57,38 +57,53 @@ app.post("/addReview", function(req, res, next) {
 
 app.post("/login", function(req, res, next) {
   queries.getUser(req.body.email, (err, dataResponse) => {
-    if (err) next(err);
+    if (err) {
+      next(err);
+      return;
+    }
     comparePasswords(
-      req.body.password,
-      dataResponse.password,
+      req.body.user_password,
+      dataResponse.rows[0].user_password,
       (error, result) => {
-        if (error) next(error);
-        if (!result) res.json(null);
+        if (error) {
+          next(err);
+          return;
+        }
+        if (!result) {
+          res.json(null);
+          return;
+        }
         const jwt = sign(req.body.email, SECRET);
         res.cookie("jwt", jwt);
-        res.json(jwt);
+        res.send("you are logged in successfully");
       }
     );
   });
 });
 
 app.post("/signup", function(req, res, next) {
-  let body = {
-    first_name: req.body.first_name,
-    last_name: req.body.last_name,
-    email: req.body.email,
-    user_password: req.body.user_password
-  };
-  let jwt = req.cookies.jwt;
-  if (cookie) res.json(jwt);
+  let body = { ...req.body };
+
   hashPassword(body.user_password, (err, result) => {
     if (err) next(err);
-    body.password = result;
-    queries.addUser(body, (err, dataResponse) => {
-      if (err) next(err);
-      jwt = sign(req.body.email, SECRET);
+    body.user_password = result;
+    queries.addUser(body, (error, dataResponse) => {
+      if (error) {
+        if (error.message.includes("duplicate key"))
+          res.send("email already exists");
+        else {
+          next(error);
+        }
+        return;
+      }
+      let jwt = req.cookies.jwt;
+      if (jwt) {
+        res.send("you are already logged in");
+        return;
+      }
+      jwt = sign(body.email, SECRET);
       res.cookie("jwt", jwt);
-      res.json(jwt);
+      res.send("you signed up successfully");
     });
   });
 });
