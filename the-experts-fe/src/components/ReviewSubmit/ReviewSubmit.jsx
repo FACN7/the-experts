@@ -22,6 +22,7 @@ export default function ReviewForm({ user_id = 1, contractor_id = 1 }) {
     }).catch(err => console.log(err));
     // redirect to another page
   };
+
   const handleChange = ({ currentTarget: input }) => setReview({ ...review, [input.name]: input.value });
 
   return (

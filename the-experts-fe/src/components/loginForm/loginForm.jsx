@@ -2,17 +2,17 @@ import React, { useState } from "react";
 
 export default function LoginForm() {
   const [user, setUser] = useState({
-    firstName: "",
-    lastName: "",
+    first_name: "",
+    last_name: "",
     email: "",
-    password: ""
+    user_password: ""
   });
 
   const handleSubmit = e => {
     e.preventDefault();
 
     // make a post request with the contractor object to ebraheem
-    fetch("/replace-me", {
+    fetch("/login", {
       method: "POST",
       body: JSON.stringify(user),
       headers: {
@@ -43,8 +43,8 @@ export default function LoginForm() {
           <input
             type="password"
             placeholder="Enter password..."
-            value={user.password}
-            name="password"
+            value={user.user_password}
+            name="user_password"
             onChange={handleChange}
             minLength="8"
             required
