@@ -4,10 +4,6 @@ import "./ContractorProfile.css";
 
 export default function ContractorProfile(props) {
   const contractor = props.location.state.contractor;
-  // jamie try to dismiss this please this is for future use (tomorrow-plan) please.. :)
-  const ContractorProfile = () => {
-    fetch(`/getReview/${contractor.id}`).then(res => res.json());
-  };
 
   return (
     <div className="ContractorProfile">

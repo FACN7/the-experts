@@ -8,7 +8,7 @@ export default function Contractors({ contractors }) {
       <React.Fragment>
         <div className="contractors-list">
           {contractors.map(c => (
-            <Link  key={c.id} to={{ pathname:`/ContractorProfile` ,state:{contractor:c}} }>
+            <Link  key={c.id} to={{ pathname:`/ContractorProfile/${c.id}` ,state:{contractor:c}} }>
             <Contractor contractor={c}  />
            </Link>
           ))}

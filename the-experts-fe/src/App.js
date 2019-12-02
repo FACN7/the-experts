@@ -13,7 +13,6 @@ export default function App() {
       <Switch className="App">
         <Route path="/register" component={RegisterationForm}></Route>
         <Route path="/ContractorProfile/:id" component={ContractorProfile} />
-        }/>
         <Route exact path="/" component={Home}></Route>
       </Switch>
       <ReviewForm></ReviewForm>
