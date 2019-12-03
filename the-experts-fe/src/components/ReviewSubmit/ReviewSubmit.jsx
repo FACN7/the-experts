@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./ReviewSubmit.css";
 
-export default function ReviewForm({ user_id = 1, contractor_id = 1 }) {
+export default function ReviewForm({ user_id, contractor_id = 1, setReviews }) {
   const [review, setReview] = useState({ reviewBody: "", isliked: false });
 
   const handleSubmit = e => {
@@ -12,6 +12,7 @@ export default function ReviewForm({ user_id = 1, contractor_id = 1 }) {
       reviewBody: review.reviewBody,
       isliked: review.isliked
     };
+    // setReviews(data);
     // make a post request with the contractor object to ebraheem
     fetch("/addReview", {
       method: "POST",
@@ -21,39 +22,45 @@ export default function ReviewForm({ user_id = 1, contractor_id = 1 }) {
       }
     }).catch(err => console.log(err));
     // redirect to another page
+    window.location = `/ContractorProfile/${contractor_id}`;
   };
 
-  const handleChange = ({ currentTarget: input }) => setReview({ ...review, [input.name]: input.value });
+  const handleChange = ({ currentTarget: input }) =>
+    setReview({ ...review, [input.name]: input.value });
 
   return (
     <React.Fragment>
       <div className="form-container">
         <form onSubmit={handleSubmit} className="rev-form">
-          <div className="rev-container">
-            <input
-              type="text"
-              placeholder="ReviewMe"
-              value={review.reviewBody}
-              name="reviewBody"
-              onChange={handleChange}
-              required
-              minLength="3"
-            />
+          <fieldset disabled={user_id ? false : true}>
+            <div className="rev-container">
+              <input
+                type="text"
+                placeholder="ReviewMe"
+                value={review.reviewBody}
+                name="reviewBody"
+                onChange={handleChange}
+                required
+                minLength="3"
+              />
 
-            <i
-              className={
-                review.isliked ? "fa fa-thumbs-up" : "fa fa-thumbs-down"
-              }
-              value={review.isliked ? "unlike" : "like"}
-              selected={review.isliked}
-              onClick={() => setReview({ ...review, isliked: !review.isliked })}
-            ></i>
-          </div>
-          <div className="form-btn">
-            <button type="submit" className="btn btn-success">
-              Submit
-            </button>
-          </div>
+              <i
+                className={
+                  review.isliked ? "fa fa-thumbs-up" : "fa fa-thumbs-down"
+                }
+                value={review.isliked ? "unlike" : "like"}
+                selected={review.isliked}
+                onClick={() =>
+                  user_id? setReview({ ...review, isliked: !review.isliked }):null
+                }
+              ></i>
+            </div>
+            <div className="form-btn">
+              <button type="submit" className="btn btn-success">
+                Submit
+              </button>
+            </div>
+          </fieldset>
         </form>
       </div>
     </React.Fragment>

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./ContractorProfile.css";
 import CommentsList from "../CommentsList/CommentsList";
+import ReviewSubmit from "../ReviewSubmit/ReviewSubmit";
+import {Link} from "react-router-dom"
 export default function ContractorProfile(props) {
   const [profileReviews, setReviews] = useState([]);
   const contractor = props.location.state.contractor;
-
   useEffect(() => {
     fetch(`/getReview/${contractor.id}`)
       .then(profileReviews => profileReviews.json())
@@ -30,6 +31,18 @@ export default function ContractorProfile(props) {
       <button className="revealContact-btn"> reveal contact into </button>
       <CommentsList comments={profileReviews} />
       <br />
+      <div>
+        {props.user.id ? (
+          <span>Review Me</span>
+        ) : (
+          <span>{<Link to="/login">Sign in</Link> } to Review Me</span>
+        )}
+        <ReviewSubmit
+          user_id={props.user.id}
+          contractor_id={contractor.id}
+          setReviews={setReviews}
+        ></ReviewSubmit>
+      </div>
     </div>
   );
 }

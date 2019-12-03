@@ -22,7 +22,11 @@ export default function App() {
     <React.Fragment>
       <NavBar user={user} />
       <Switch className="App">
-        <Route path="/ContractorProfile/:id" component={ContractorProfile} />
+        <Route
+          path="/ContractorProfile/:id"
+          render={props => <ContractorProfile {...props} user={user} />}
+        />
+
         <Route path="/register" component={RegisterForm}></Route>
         <Route path="/login" component={LoginForm}></Route>
         <Route exact path="/" component={Home}></Route>
