@@ -36,7 +36,6 @@ export default function RegisterForm() {
   const handleChange = ({ currentTarget: input }) => {
     setUser({ ...user, [input.name]: input.value });
   };
-  console.log(isExist);
   return (
     <React.Fragment>
       <div className="form-container">
