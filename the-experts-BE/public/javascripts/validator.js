@@ -9,14 +9,14 @@ const checkArray = [
   check("last_name")
     .not()
     .isEmpty()
-    .isLength({ min: 4 })
+    .isLength({ min: 3 })
     .withMessage("Name must have more than 3 characters"),
   check("email", "Your email is not valid")
     .not()
     .isEmpty()
     .isEmail()
     .normalizeEmail(),
-  check("user_password", "Your password must be at least 5 characters")
+  check("user_password", "Your password must be at least 8 characters")
     .not()
     .isEmpty()
     .isLength({ min: 8 })
