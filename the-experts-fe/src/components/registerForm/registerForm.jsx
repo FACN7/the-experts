@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
 
-export default function RegisterForm() {
+export default function RegisterForm(props) {
   const [user, setUser] = useState({
     first_name: "",
     last_name: "",
@@ -10,6 +10,11 @@ export default function RegisterForm() {
     user_password: ""
   });
   const [isExist, setIsExists] = useState(false);
+
+  const token = localStorage.getItem("token");
+  if (token) {
+    props.history.replace("/");
+  }
 
   const handleSubmit = e => {
     e.preventDefault();
