@@ -11,7 +11,8 @@ const { sign, verify } = require("jsonwebtoken");
 const getReview = require("./routes/getReview");
 const queries = require("./queries/index");
 const env = require("env2");
-
+const { validationResult } = require("express-validator");
+const checkArray = require("./public/javascripts/validator");
 env("./config.env");
 const SECRET = process.env.SECRET;
 
@@ -100,7 +101,12 @@ app.post("/login", function(req, res, next) {
   });
 });
 
-app.post("/signup", function(req, res, next) {
+app.post("/signup", checkArray, function(req, res, next) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    console.log(errors.array());
+    return res.status(422).jsonp(errors.array());
+  }
   hashPassword(req.body.user_password, (err, hashedPws) => {
     if (err) next(err);
     const bodyWithHashedPwd = { ...req.body, user_password: hashedPws };
