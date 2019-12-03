@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Cookies from "js-cookie";
+import { Link } from "react-router-dom";
 
 export default function RegisterForm() {
   const [user, setUser] = useState({
@@ -7,6 +9,7 @@ export default function RegisterForm() {
     email: "",
     user_password: ""
   });
+  const [isExist, setIsExists] = useState(false);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -18,13 +21,21 @@ export default function RegisterForm() {
       headers: {
         "Content-Type": "application/json"
       }
-    }).catch(err => console.log(err));
-    // redirect to another page
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.isExist) {
+          setIsExists(true);
+        } else {
+          localStorage.setItem("token", Cookies.get("jwt"));
+          window.location = "/";
+        }
+      })
+      .catch(err => console.log(err));
   };
   const handleChange = ({ currentTarget: input }) => {
     setUser({ ...user, [input.name]: input.value });
   };
-
   return (
     <React.Fragment>
       <div className="form-container">
@@ -66,7 +77,16 @@ export default function RegisterForm() {
             minLength="8"
             required
           />
-
+          <div className="isExist">
+            {isExist && (
+              <div className="isExist-content">
+                <p className="isExst-paragraph">
+                  User with the given email is already exists, Please
+                  <Link to="/login"> Signin</Link>
+                </p>
+              </div>
+            )}
+          </div>
           <div className="form-btn">
             <button type="submit" className="btn btn-success">
               Submit

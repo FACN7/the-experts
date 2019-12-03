@@ -7,6 +7,7 @@ import RegisterForm from "./components/registerForm/registerForm";
 import ContractorProfile from "./components/ContractorProfile/ContractorProfile";
 import Home from "./components/home/home";
 import "./App.css";
+import Logout from "./components/logout/logout";
 
 export default function App() {
   const [user, setUser] = useState({});
@@ -29,6 +30,7 @@ export default function App() {
 
         <Route path="/register" component={RegisterForm}></Route>
         <Route path="/login" component={LoginForm}></Route>
+        <Route path="/logout" component={Logout}></Route>
         <Route exact path="/" component={Home}></Route>
       </Switch>
     </React.Fragment>
