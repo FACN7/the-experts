@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Cookies from "js-cookie";
+import { Link } from "react-router-dom";
 
 export default function LoginForm(props) {
   const [user, setUser] = useState({
@@ -8,6 +9,7 @@ export default function LoginForm(props) {
     email: "",
     user_password: ""
   });
+  const [isExist, setIsExist] = useState(true);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -20,9 +22,14 @@ export default function LoginForm(props) {
         "Content-Type": "application/json"
       }
     })
+      .then(res => res.json())
       .then(res => {
-        localStorage.setItem("token", Cookies.get("jwt"));
-        window.location = "/";
+        if (res.isExist) {
+          setIsExist(false);
+        } else {
+          localStorage.setItem("token", Cookies.get("jwt"));
+          window.location = "/";
+        }
       })
       .catch(err => console.log(err));
   };
@@ -53,7 +60,16 @@ export default function LoginForm(props) {
             minLength="8"
             required
           />
-
+          <div className="isExist">
+            {!isExist && (
+              <div className="isExist-content">
+                <p className="isExst-paragraph">
+                  Wrong email or password, Please
+                  <Link to="/register"> Signup</Link>
+                </p>
+              </div>
+            )}
+          </div>
           <div className="form-btn">
             <button type="submit" className="btn btn-success">
               Submit

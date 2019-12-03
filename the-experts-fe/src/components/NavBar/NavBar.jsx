@@ -39,7 +39,7 @@ export default function NavBar({ user }) {
                 className="inactive"
                 exact
                 activeClassName="active"
-                to="/login"
+                to="/user-profile"
               >
                 {user.first_name}
               </NavLink>
@@ -48,7 +48,7 @@ export default function NavBar({ user }) {
                 exact
                 className="inactive"
                 activeClassName="active"
-                to="/register"
+                to="/logout"
               >
                 Logout
               </NavLink>

@@ -86,7 +86,7 @@ app.post("/login", function(req, res, next) {
           return;
         }
         if (!result) {
-          res.json(null);
+          res.json({ isExist: true });
           return;
         }
         const user = { ...dataResponse.rows[0] };
@@ -106,9 +106,9 @@ app.post("/signup", function(req, res, next) {
     const bodyWithHashedPwd = { ...req.body, user_password: hashedPws };
     queries.addUser(bodyWithHashedPwd, (error, dataResponse) => {
       if (error) {
-        if (error.message.includes("duplicate key"))
-          res.send("email already exists");
-        else {
+        if (error.message.includes("duplicate key")) {
+          res.json({ isExist: true, message: "email already exists" });
+        } else {
           next(error);
         }
         return;
@@ -117,7 +117,7 @@ app.post("/signup", function(req, res, next) {
       delete user.hashedPws;
       const jwt = sign(JSON.stringify(user), SECRET);
       res.cookie("jwt", jwt);
-      res.send("you signed up successfully");
+      res.json("you signed up successfully");
     });
   });
 });
