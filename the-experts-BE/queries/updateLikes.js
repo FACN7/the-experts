@@ -1,9 +1,9 @@
 const databaseConnection = require("../database/db_connection.js");
 
-const getContractor = (name, cb) => {
+const updateLikes = (id, cb) => {
   databaseConnection.query(
-    `SELECT * FROM Contractor WHERE job=$1 ORDER BY likes DESC;`,
-    [name],
+    `UPDATE Contractor SET likes=likes+1 WHERE id=$1 ;`,
+    [id],
     (err, res) => {
       if (err) {
         return cb(err);
@@ -14,4 +14,4 @@ const getContractor = (name, cb) => {
   );
 };
 
-module.exports = getContractor;
+module.exports = updateLikes;

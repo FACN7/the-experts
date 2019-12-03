@@ -26,9 +26,9 @@ export default function LoginForm(props) {
         "Content-Type": "application/json"
       }
     })
-      .then(res => res.json())
+      .then(res => res.json())  
       .then(res => {
-        if (res.isExist) {
+        if (res.isExist===false) {
           setIsExist(false);
         } else {
           localStorage.setItem("token", Cookies.get("jwt"));
