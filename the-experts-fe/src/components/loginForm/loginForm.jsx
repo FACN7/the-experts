@@ -11,6 +11,10 @@ export default function LoginForm(props) {
   });
   const [isExist, setIsExist] = useState(true);
 
+  const token = localStorage.getItem("token");
+  if (token) {
+    props.history.replace("/");
+  }
   const handleSubmit = e => {
     e.preventDefault();
 
