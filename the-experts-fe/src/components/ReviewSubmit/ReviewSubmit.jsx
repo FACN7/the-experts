@@ -20,7 +20,17 @@ export default function ReviewForm({ user_id, contractor_id = 1, setReviews }) {
       headers: {
         "Content-Type": "application/json"
       }
-    }).catch(err => console.log(err));
+    })
+      .then(
+        fetch("/updateLikes", {
+          method: "POST",
+          body: { id: user_id },
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }).catch(err => console.log(err))
+      )
+      .catch(err => console.log(err));
     // redirect to another page
     window.location = `/ContractorProfile/${contractor_id}`;
   };
@@ -51,7 +61,9 @@ export default function ReviewForm({ user_id, contractor_id = 1, setReviews }) {
                 value={review.isliked ? "unlike" : "like"}
                 selected={review.isliked}
                 onClick={() =>
-                  user_id? setReview({ ...review, isliked: !review.isliked }):null
+                  user_id
+                    ? setReview({ ...review, isliked: !review.isliked })
+                    : null
                 }
               ></i>
             </div>

@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS Contractor (
     id SERIAL PRIMARY KEY,
     cont_name VARCHAR (50) NOT NULL,
     job TEXT NOT NULL,
-    rating double precision DEFAULT 0
+    likes double precision DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS Users (
@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS Reviews (
     contractor_id int NOT NULL,
     reviewBody TEXT,
     isliked BOOLEAN,
+    reviewtime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (contractor_id) REFERENCES Contractor (id),
     FOREIGN KEY (user_id) REFERENCES Users (id)
 );
@@ -40,12 +41,12 @@ VALUES
     );
 
 INSERT INTO
-    Contractor (cont_name, job, rating)
+    Contractor (cont_name, job, likes)
 VALUES
     ('ali', 'plumber', 3.5);
 
 INSERT INTO
-    Contractor (cont_name, job, rating)
+    Contractor (cont_name, job, likes)
 VALUES
     ('samih', 'plumber', 2);
 

@@ -15,7 +15,7 @@ export default function Contractor({ contractor }) {
             {contractor.cont_name}, {contractor.job}
           </h1>
           <p className="contractor-location">Haifa and north regions</p>
-          <p className="contractor-rating">{contractor.rating}</p>
+          <p className="contractor-likes">{contractor.likes}</p>
         </div>
       </div>
     </div>

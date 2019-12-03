@@ -23,7 +23,7 @@ export default function ContractorProfile(props) {
 
       <h1 className="contractor-name"> {contractor.cont_name}</h1>
       <p className="contractor-description">{`${contractor.cont_name} is an experienced ${contractor.job} `}</p>
-      <p className="contractor-rating">rating : {contractor.rating}</p>
+      <p className="contractor-likes">likes : {contractor.likes}</p>
       <p className="contractor-feedBacks">
         FeedBacks({profileReviews.length}){" "}
       </p>

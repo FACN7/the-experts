@@ -3,6 +3,8 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const getContractor = require("./routes/contractor-results");
+const getUser = require("./routes/getUser");
+
 const {
   comparePasswords,
   hashPassword
@@ -30,6 +32,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/contractor-results/:job", getContractor);
 app.use("/getReview/:contractor_id", getReview);
+app.use("/getUser/:id", getUser);
 
 app.get("/auth", (req, res, next) => {
   const jwt = req.cookies.jwt;
@@ -61,7 +64,7 @@ app.post("/addContractor", function(req, res, next) {
       if (err) next(err);
       res.json(dataResponse);
     },
-    req.body.rating
+    req.body.likes
   );
 });
 
@@ -78,6 +81,9 @@ app.post("/login", function(req, res, next) {
       next(err);
       return;
     }
+    if (dataResponse.rows.length <= 0) {
+      return res.json({ isExist: false });
+    }
     comparePasswords(
       req.body.user_password,
       dataResponse.rows[0].user_password,
@@ -87,8 +93,7 @@ app.post("/login", function(req, res, next) {
           return;
         }
         if (!result) {
-          res.json({ isExist: true });
-          return;
+          return res.json({ isExist: false });
         }
         const user = { ...dataResponse.rows[0] };
         delete user.user_password;
@@ -125,6 +130,13 @@ app.post("/signup", checkArray, function(req, res, next) {
       res.cookie("jwt", jwt);
       res.json("you signed up successfully");
     });
+  });
+});
+
+app.post("/updateLikes", (req, res, next) => {
+  queries.updateLikes(req.body.id, err => {
+    if (err) next(err);
+    res.json({ msg: "updated sucsuccessfully" });
   });
 });
 

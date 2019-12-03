@@ -3,7 +3,8 @@ const addContractor = require("./addContractor");
 const getReview = require("./getReview");
 const addReview = require("./addReview");
 const getUser = require("./getUser");
-const addUser=require("./addUser");
+const addUser = require("./addUser");
+const updateLikes = require("./updateLikes");
 
 module.exports = {
   getContractor,
@@ -11,6 +12,6 @@ module.exports = {
   getReview,
   addReview,
   getUser,
-  addUser
-
+  addUser,
+  updateLikes
 };
