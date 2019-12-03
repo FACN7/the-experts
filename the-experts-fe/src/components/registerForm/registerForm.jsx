@@ -10,7 +10,7 @@ export default function RegisterForm() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    
+
     // make a post request with the contractor object to ebraheem
     fetch("/signup", {
       method: "POST",
@@ -22,8 +22,7 @@ export default function RegisterForm() {
     // redirect to another page
   };
   const handleChange = ({ currentTarget: input }) => {
-    user[input.name] = input.value;
-    setUser({ ...user });
+    setUser({ ...user, [input.name]: input.value });
   };
 
   return (
