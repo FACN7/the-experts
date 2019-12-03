@@ -5,7 +5,7 @@ const addReview = require("./addReview");
 const getUser = require("./getUser");
 const addUser = require("./addUser");
 const updateLikes = require("./updateLikes");
-
+const getUserById=require("./getUserById")
 module.exports = {
   getContractor,
   addContractor,
@@ -13,5 +13,6 @@ module.exports = {
   addReview,
   getUser,
   addUser,
-  updateLikes
+  updateLikes,
+  getUserById
 };
