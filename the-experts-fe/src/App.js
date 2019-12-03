@@ -1,16 +1,26 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
+import { Route, Switch } from "react-router-dom";
+import jwtDecode from "jwt-decode";
 import NavBar from "./components/NavBar/NavBar";
 import LoginForm from "./components/loginForm/loginForm";
 import RegisterForm from "./components/registerForm/registerForm";
 import ContractorProfile from "./components/ContractorProfile/ContractorProfile";
-import { Route, Switch } from "react-router-dom";
 import Home from "./components/home/home";
+import "./App.css";
 
 export default function App() {
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    try {
+      const jwt = localStorage.getItem("token");
+      const user = jwtDecode(jwt);
+      setUser({ ...user });
+    } catch (error) {}
+  }, []);
+
   return (
     <React.Fragment>
-      <NavBar firstParm="Login" secondParam="Register" />
+      <NavBar user={user} />
       <Switch className="App">
         <Route path="/ContractorProfile/:id" component={ContractorProfile} />
         <Route path="/register" component={RegisterForm}></Route>
