@@ -1,9 +1,8 @@
 const databaseConnection = require("../database/db_connection.js");
 
-const updateLikes = (id, cb) => {
-  console.log(id);
+const getUser = (id, cb) => {
   databaseConnection.query(
-    `UPDATE Contractor SET likes=likes+1 WHERE id = $1`,
+    `SELECT * FROM Users WHERE id=$1`,
     [id],
     (err, res) => {
       if (err) {
@@ -15,4 +14,4 @@ const updateLikes = (id, cb) => {
   );
 };
 
-module.exports = updateLikes;
+module.exports = getUser;

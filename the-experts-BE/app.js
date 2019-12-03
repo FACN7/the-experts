@@ -81,6 +81,7 @@ app.post("/login", function(req, res, next) {
       next(err);
       return;
     }
+    console.log(dataResponse.rows);
     if (dataResponse.rows.length <= 0) {
       return res.json({ isExist: false });
     }

@@ -20,17 +20,16 @@ export default function ReviewForm({ user_id, contractor_id = 1, setReviews }) {
       headers: {
         "Content-Type": "application/json"
       }
-    })
-      .then(
-        fetch("/updateLikes", {
-          method: "POST",
-          body: { id: user_id },
-          headers: {
-            "Content-Type": "application/json"
-          }
-        }).catch(err => console.log(err))
-      )
-      .catch(err => console.log(err));
+    }).catch(err => console.log(err));
+    if (data.isliked) {
+      fetch("/updateLikes", {
+        method: "POST",
+        body: JSON.stringify({ id: data.contractor_id }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).catch(err => console.log(err));
+    }
     // redirect to another page
     window.location = `/ContractorProfile/${contractor_id}`;
   };
