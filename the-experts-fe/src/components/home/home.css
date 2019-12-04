@@ -1,7 +1,7 @@
 #home-header {
-  background: url("https://cdn.cbtnews.com/wp-content/uploads/2017/10/shutterstock_505405795.jpg") no-repeat center center/cover;
+  background: url("https://cdn.cbtnews.com/wp-content/uploads/2017/10/shutterstock_505405795.jpg")
+    no-repeat center center/cover;
   height: 350px;
-
 }
 
 #home-header h1 {
@@ -24,9 +24,16 @@
   padding: 3em 0 2em 0;
 }
 
-#why-us {}
+#why-us {
+}
 
 #why-us .why-us-content {
   display: flex;
+  justify-content: center;
+}
 
+@media screen and (max-width: 768px) {
+  #why-us .why-us-content {
+    flex-direction: column;
+  }
 }

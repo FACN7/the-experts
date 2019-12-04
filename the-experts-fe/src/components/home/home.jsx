@@ -65,12 +65,12 @@ export default function Home() {
           />
           <WhyUs
             imageSrc="https://www.urbanys.org/wp-content/uploads/2017/12/operator_support_girl-512.png"
-            description1="we Are always here for you "
+            description1="We are always here for you "
             description2="if you want to ask or notify us about something just call "
           />
           <WhyUs
             imageSrc="https://cdn3.iconfinder.com/data/icons/miscellaneous-16-solid/128/credible_reliable_Dependable_authentic_credibility_trust-512.png"
-            description1="best Value for the money"
+            description1="Best value for the money"
             description2="We will grantee that you will get the best service"
           />
         </div>
