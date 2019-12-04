@@ -7,7 +7,7 @@ export default function Comment(CommentBody) {
       <img
         className="reviewer-img"
         src="https://www.w3schools.com/bootstrap4/img_avatar3.png"
-        alt="reviewer picture"
+        alt=""
       />
       <p>{CommentBody.comment.reviewbody}</p>
       <p>{CommentBody.comment.isliked && `Liked 👍✔️`}</p>

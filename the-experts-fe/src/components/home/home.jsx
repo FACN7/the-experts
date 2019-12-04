@@ -6,12 +6,7 @@ import "./home.css";
 import ContractorForm from "../contractorForm/ContractorForm";
 
 export default function Home() {
-  const [jobsArray, setJobArray] = useState([
-    { id: 1, value: "wood-worker" },
-    { id: 2, value: "plumber" },
-    { id: 3, value: "electric" },
-    { id: 4, value: "painter" }
-  ]);
+  const [jobsArray, setJobArray] = useState([]);
   const [jobValue, setJobValue] = useState("");
   const [selectedContractors, setSelectedContractors] = useState([]);
 
@@ -28,6 +23,12 @@ export default function Home() {
         });
     }
   }, [jobValue]);
+
+  useEffect(() => {
+    fetch(`/jobs`)
+      .then(res => res.json())
+      .then(res => setJobArray(res));
+  }, []);
 
   const handleSelect = job => {
     setJobValue(job);
@@ -73,6 +74,10 @@ export default function Home() {
             description2="We will grantee that you will get the best service"
           />
         </div>
+      </section>
+
+      <section>
+        <ContractorForm></ContractorForm>
       </section>
     </React.Fragment>
   );

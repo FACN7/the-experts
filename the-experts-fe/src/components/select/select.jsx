@@ -10,9 +10,9 @@ export default function Select({ options, onSelect }) {
     <select className="select" onChange={e => onSelect(e.target.value)}>
       <option value=""></option>
       {options.map(opt => (
-        <option key={opt.id} value={opt.value}>
-          {opt.value}
-       </option>
+        <option key={opt.id} value={opt.job}>
+          {opt.job}
+        </option>
       ))}
     </select>
   );

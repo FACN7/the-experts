@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./ContractorProfile.css";
 import CommentsList from "../CommentsList/CommentsList";
 import ReviewSubmit from "../ReviewSubmit/ReviewSubmit";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 export default function ContractorProfile(props) {
   const [profileReviews, setReviews] = useState([]);
   const contractor = props.location.state.contractor;
@@ -17,7 +17,7 @@ export default function ContractorProfile(props) {
       <div className="contractorImage">
         <img
           src="https://www.w3schools.com/bootstrap4/img_avatar3.png"
-          alt="reviewer picture"
+          alt=""
         />
       </div>
 
@@ -35,7 +35,7 @@ export default function ContractorProfile(props) {
         {props.user.id ? (
           <span>Review Me</span>
         ) : (
-          <span>{<Link to="/login">Sign in</Link> } to Review Me</span>
+          <span>{<Link to="/login">Sign in</Link>} to Review Me</span>
         )}
         <ReviewSubmit
           user_id={props.user.id}
