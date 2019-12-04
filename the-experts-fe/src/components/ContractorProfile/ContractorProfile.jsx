@@ -5,12 +5,21 @@ import ReviewSubmit from "../ReviewSubmit/ReviewSubmit";
 import { Link } from "react-router-dom";
 export default function ContractorProfile(props) {
   const [profileReviews, setReviews] = useState([]);
+  const [isRevealed, setIsRevealed] = useState(true);
   const contractor = props.location.state.contractor;
   useEffect(() => {
     fetch(`/getReview/${contractor.id}`)
       .then(profileReviews => profileReviews.json())
       .then(profileReviews => setReviews(profileReviews));
   }, []);
+
+  const handleRevealClick = () => {
+    setIsRevealed(!isRevealed);
+  };
+
+  const renderReveal = () => {
+    return isRevealed ? "" : "hide";
+  };
 
   return (
     <div className="ContractorProfile">
@@ -28,20 +37,24 @@ export default function ContractorProfile(props) {
         FeedBacks({profileReviews.length}){" "}
       </p>
 
-      <button className="revealContact-btn"> reveal contact into </button>
-      <CommentsList comments={profileReviews} />
-      <br />
-      <div>
-        {props.user.id ? (
-          <span>Review Me</span>
-        ) : (
-          <span>{<Link to="/login">Sign in</Link>} to Review Me</span>
-        )}
-        <ReviewSubmit
-          user_id={props.user.id}
-          contractor_id={contractor.id}
-          setReviews={setReviews}
-        ></ReviewSubmit>
+      <button className="revealContact-btn" onClick={handleRevealClick}>
+        Reveal Contact Feedback
+      </button>
+      <div className={renderReveal()}>
+        <CommentsList comments={profileReviews} />
+        <br />
+        <div>
+          {props.user.id ? (
+            <span>Review Me</span>
+          ) : (
+            <span>{<Link to="/login">Sign in</Link>} to Review Me</span>
+          )}
+          <ReviewSubmit
+            user_id={props.user.id}
+            contractor_id={contractor.id}
+            setReviews={setReviews}
+          ></ReviewSubmit>
+        </div>
       </div>
     </div>
   );
