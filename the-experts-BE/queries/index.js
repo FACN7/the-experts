@@ -5,7 +5,10 @@ const addReview = require("./addReview");
 const getUser = require("./getUser");
 const addUser = require("./addUser");
 const updateLikes = require("./updateLikes");
-const getUserById=require("./getUserById")
+const getUserById = require("./getUserById");
+const addjob = require("./addjob");
+const jobs = require("./jobs");
+
 module.exports = {
   getContractor,
   addContractor,
@@ -14,5 +17,7 @@ module.exports = {
   getUser,
   addUser,
   updateLikes,
-  getUserById
+  getUserById,
+  addjob,
+  jobs
 };

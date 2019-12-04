@@ -2,7 +2,8 @@ BEGIN;
 
 DROP TABLE IF EXISTS Contractor,
 Reviews,
-Users;
+Users,
+jobs;
 
 CREATE TABLE IF NOT EXISTS Contractor (
     id SERIAL PRIMARY KEY,
@@ -30,15 +31,18 @@ CREATE TABLE IF NOT EXISTS Reviews (
     FOREIGN KEY (user_id) REFERENCES Users (id)
 );
 
+CREATE TABLE IF NOT EXISTS jobs (
+    id SERIAL PRIMARY KEY,
+    job TEXT NOT NULL UNIQUE
+);
+
 INSERT INTO
-    Users (first_name, last_name, email, user_password)
+    jobs (job)
 VALUES
-    (
-        'ebraheem',
-        'abbas',
-        'ebraheemabbas51@gmail.com',
-        'password'
-    );
+    ('plumber'),
+    ('wood-worker'),
+    ('electric'),
+    ('painter');
 
 INSERT INTO
     Contractor (cont_name, job, likes)
@@ -49,10 +53,5 @@ INSERT INTO
     Contractor (cont_name, job, likes)
 VALUES
     ('samih', 'plumber', 2);
-
-INSERT INTO
-    Reviews (user_id, contractor_id, reviewBody, isliked)
-VALUES
-    (1, 1, 'Ali is expert plumber', True);
 
 COMMIT;

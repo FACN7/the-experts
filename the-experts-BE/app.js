@@ -4,7 +4,9 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const getContractor = require("./routes/contractor-results");
 const getUser = require("./routes/getUser");
+const jobs = require("./routes/getjobs");
 const getUserById=require("./routes/getUserById")
+
 
 const {
   comparePasswords,
@@ -34,6 +36,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/contractor-results/:job", getContractor);
 app.use("/getReview/:contractor_id", getReview);
 app.use("/getUser/:email", getUser);
+app.use("/jobs", jobs);
+app.use("/getUser/:email", getUser);
 app.use("/getUserById/:id", getUserById);
 
 app.get("/auth", (req, res, next) => {
@@ -62,9 +66,12 @@ app.post("/addContractor", function(req, res, next) {
   queries.addContractor(
     req.body.name,
     req.body.job,
-    (err, dataResponse) => {
+    err => {
       if (err) next(err);
-      res.json(dataResponse);
+      queries.addjob(req.body.job.toLowerCase(), error => {
+        if (error) next(error);
+      });
+      res.json("all done");
     },
     req.body.likes
   );
