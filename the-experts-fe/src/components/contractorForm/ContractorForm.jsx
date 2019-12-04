@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../../../public/css/form.css";
 
 export default function ContractorForm() {
@@ -24,7 +24,7 @@ export default function ContractorForm() {
   return (
     <React.Fragment>
       <div className="form-container">
-        <h1>Start Your Journey</h1>
+        <h1>Join Us</h1>
 
         <form onSubmit={handleSubmit} className="reg-form">
           <input
@@ -34,7 +34,7 @@ export default function ContractorForm() {
             name="name"
             onChange={handleChange}
             required
-            minlength="3"
+            minLength="3"
           />
 
           <input
@@ -44,7 +44,7 @@ export default function ContractorForm() {
             name="job"
             onChange={handleChange}
             required
-            minlength="3"
+            minLength="3"
           />
           <div className="form-btn">
             <button type="submit" className="btn btn-success">

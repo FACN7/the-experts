@@ -26,7 +26,7 @@ export default function ContractorProfile(props) {
       <div className="contractorImage">
         <img
           src="https://www.w3schools.com/bootstrap4/img_avatar3.png"
-          alt="reviewer picture"
+          alt=""
         />
       </div>
 

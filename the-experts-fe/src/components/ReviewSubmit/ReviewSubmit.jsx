@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./ReviewSubmit.css";
 
 export default function ReviewForm({ user_id, contractor_id = 1, setReviews }) {
