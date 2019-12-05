@@ -77,7 +77,6 @@ app.post("/addContractor", function(req, res, next) {
 });
 
 app.post("/addReview", function(req, res, next) {
-  console.log("1");
   try {
     queries.addReview(req.body, (err, dataResponse) => {
       if (err) next(err);
