@@ -44,11 +44,6 @@ export default function ContractorProfile(props) {
         <CommentsList comments={profileReviews} />
         <br />
         <div>
-          {props.user.id ? (
-            <span>Review Me</span>
-          ) : (
-            <span>{<Link to="/login">Sign in</Link>} to Review Me</span>
-          )}
           <ReviewSubmit
             user_id={props.user.id}
             contractor_id={contractor.id}

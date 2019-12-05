@@ -1,6 +1,6 @@
 const databaseConnection = require("../database/db_connection.js");
 
-const addReview = ({user_id, contractor_id, reviewBody, isliked}, cb) => {
+const addReview = ({ user_id = 1, contractor_id, reviewBody, isliked }, cb) => {
   databaseConnection.query(
     `INSERT INTO Reviews (user_id,contractor_id,reviewBody,isliked)
         VALUES ($1, $2,$3,$4);`,

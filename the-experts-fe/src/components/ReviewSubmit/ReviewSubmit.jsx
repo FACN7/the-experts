@@ -41,7 +41,7 @@ export default function ReviewForm({ user_id, contractor_id = 1, setReviews }) {
     <React.Fragment>
       <div className="form-container">
         <form onSubmit={handleSubmit} className="rev-form">
-          <fieldset disabled={user_id ? false : true}>
+          <fieldset disabled={user_id ? true : false}>
             <div className="rev-container">
               <input
                 type="text"
@@ -67,7 +67,11 @@ export default function ReviewForm({ user_id, contractor_id = 1, setReviews }) {
               ></i>
             </div>
             <div className="form-btn">
-              <button type="submit" className="btn btn-success">
+              <button
+                style={{ minWidth: "100px" }}
+                type="submit"
+                className="btn btn-success"
+              >
                 Submit
               </button>
             </div>
