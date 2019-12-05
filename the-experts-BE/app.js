@@ -5,8 +5,7 @@ const logger = require("morgan");
 const getContractor = require("./routes/contractor-results");
 const getUser = require("./routes/getUser");
 const jobs = require("./routes/getjobs");
-const getUserById=require("./routes/getUserById")
-
+const getUserById = require("./routes/getUserById");
 
 const {
   comparePasswords,
@@ -78,10 +77,14 @@ app.post("/addContractor", function(req, res, next) {
 });
 
 app.post("/addReview", function(req, res, next) {
-  queries.addReview(req.body, (err, dataResponse) => {
-    if (err) next(err);
-    res.json(dataResponse);
-  });
+  try {
+    queries.addReview(req.body, (err, dataResponse) => {
+      if (err) next(err);
+      res.json(dataResponse);
+    });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.post("/login", function(req, res, next) {
